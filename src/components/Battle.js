@@ -3,9 +3,7 @@ import React from 'react';
 function Battle() {
 
   return (
-    <div>
-      Battle
-    </div>
+    <div>Battle</div>
   );
 }
 

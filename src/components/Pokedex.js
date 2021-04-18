@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Pokedex(props) {
-    // pokemon - data, setPokemon - setter
-    const [pokemon, setPokemon] = useState(''); // equivalent to pokemon: '' in constructor
+function Pokedex() {
 
-    return (
-        <h1>This is the Pokedex</h1>
-    )
+  return (
+    <div>Pokedex</div>
+  );
 }
 
 export default Pokedex;

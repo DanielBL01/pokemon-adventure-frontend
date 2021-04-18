@@ -1,10 +1,17 @@
 import React from 'react';
 
-function Starter() {
+function Starter(props) {
+  function handleClick(e) {
+    e.preventDefault();
+    props.setPage('Town');
+  }
 
   return (
     <div>
-      Choose Starter
+      <div>Choose a Starter Pokemon...</div>
+      <button onClick={handleClick}>
+        Starter
+      </button>
     </div>
   );
 }
