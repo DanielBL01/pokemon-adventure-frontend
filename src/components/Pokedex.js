@@ -1,9 +1,13 @@
 import React from 'react';
 
-function Pokedex() {
-
+function Pokedex(props) {
   return (
-    <div>Pokedex</div>
+      <div>
+        <span onClick = {props.handleClick}>
+          &times;
+        </span>
+        <div>Pokedex</div>
+      </div>
   );
 }
 

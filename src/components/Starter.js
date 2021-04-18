@@ -9,7 +9,7 @@ function Starter(props) {
   return (
     <div>
       <div>Choose a Starter Pokemon...</div>
-      <button onClick={handleClick}>
+      <button onClick = {handleClick}>
         Starter
       </button>
     </div>

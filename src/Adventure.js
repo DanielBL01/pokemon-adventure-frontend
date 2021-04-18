@@ -8,14 +8,20 @@ import Pokedex from './components/Pokedex';
 function Adventure() {
 
   const [page, setPage] = useState('Starter');
-  // const [starter, setStarter] = useState('');
-  // const [pokemon, setPokemon] = useState('');
+  const [seen, setSeen] = useState(false);
+
+  function handleClick() {
+    setSeen(!seen);
+  }
 
   switch (page) {
     case 'Town':
       return (
         <div>
-          <Town setPage = {setPage} />
+          <Town setPage = {setPage} handleClick = {handleClick} />
+          <div>
+            {seen ? <Pokedex handleClick = {handleClick} /> : null}
+          </div>
         </div>
       );
     case 'Grass':
@@ -30,12 +36,6 @@ function Adventure() {
           <Battle setPage = {setPage} />
         </div>
       );
-    case 'Pokedex':
-      return (
-        <div>
-          <Pokedex setPage = {setPage} />
-        </div>
-      )
     default:
       return (
         <div>

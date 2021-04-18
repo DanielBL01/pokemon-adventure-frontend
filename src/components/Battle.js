@@ -1,9 +1,17 @@
 import React from 'react';
 
-function Battle() {
-
+function Battle(props) {
+  function handleClick(e) {
+    e.preventDefault();
+    props.setPage('Grass');
+  }
   return (
-    <div>Battle</div>
+    <div>
+      <div>Battle</div>
+      <button onClick = {handleClick}>
+        Run
+      </button>
+    </div>
   );
 }
 

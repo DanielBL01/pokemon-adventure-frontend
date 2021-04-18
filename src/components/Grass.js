@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const delay = Math.floor(Math.random() * 10);
+const delay = Math.floor(Math.random() * (10 - 5) + 5);
 
 function Grass(props) {
   useEffect(() => {
@@ -10,8 +10,18 @@ function Grass(props) {
     }
   }, [props]);
 
+  function handleClick(e) {
+    e.preventDefault();
+    props.setPage('Town');
+  }
+
   return (
-    <div>Walking in the Tall Grass...</div>
+    <div>
+      <div>Walking in the Tall Grass...</div>
+      <button onClick = {handleClick}>
+        Go back to Town
+      </button>
+    </div>
   );
 }
 
