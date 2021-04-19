@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import Starter from './components/Starter';
 import Town from './components/Town';
-import Grass from './components/Grass';
 import Battle from './components/Battle';
 import Pokedex from './components/Pokedex';
+import Habitat from './components/Habitat';
 
 function Adventure() {
 
   const [page, setPage] = useState('Starter');
   const [seen, setSeen] = useState(false);
+  const [starter, setStarter] = useState('');
+  const [habitat, setHabitat] = useState(0);
 
   function handleClick() {
     setSeen(!seen);
@@ -18,16 +20,16 @@ function Adventure() {
     case 'Town':
       return (
         <div>
-          <Town setPage = {setPage} handleClick = {handleClick} />
+          <Town setPage = {setPage} setHabitat = { setHabitat } handleClick = {handleClick} />
           <div>
             {seen ? <Pokedex handleClick = {handleClick} /> : null}
           </div>
         </div>
       );
-    case 'Grass':
+    case 'Habitat':
       return (
         <div>
-          <Grass setPage = {setPage} />
+          <Habitat setPage = {setPage} habitat = { habitat } />
         </div>
       );
     case 'Battle':
@@ -39,7 +41,7 @@ function Adventure() {
     default:
       return (
         <div>
-          <Starter setPage = {setPage} />
+          <Starter setPage = {setPage} starter = {starter} setStarter = {setStarter} />
         </div>
       );
   };
