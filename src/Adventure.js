@@ -17,6 +17,7 @@ function Adventure() {
   }
 
   switch (page) {
+    // Town is where you choose to view your Pokedex or go to a Habitat to find Pokemon
     case 'Town':
       return (
         <div>
@@ -26,18 +27,21 @@ function Adventure() {
           </div>
         </div>
       );
+    // Habitat is a waiting screen to simulate waiting for a wild Pokemon to appear. There should also be an option to go back to Town
     case 'Habitat':
       return (
         <div>
-          <Habitat setPage = {setPage} habitat = { habitat } />
+          <Habitat setPage = {setPage} />
         </div>
       );
+    // Battle is where you find a random Pokemon in the Habitat and either Battle or Run Away
     case 'Battle':
       return (
         <div>
-          <Battle setPage = {setPage} />
+          <Battle setPage = {setPage} habitat = { habitat } />
         </div>
       );
+    // Starter is where you choose your starter Pokemon when a user first enters
     default:
       return (
         <div>
