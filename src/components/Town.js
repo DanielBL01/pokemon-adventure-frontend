@@ -8,8 +8,7 @@ function Town(props) {
 
   return (
     <div>
-      <div>Welcome to your Town</div>
-      
+      <div>Welcome to your Town!</div>
       <button onClick = {() => handleClick(1)}>
         Cave
       </button>

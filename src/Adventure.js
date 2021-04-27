@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Starter from './components/Starter';
 import Town from './components/Town';
-import Battle from './components/Battle';
 import Pokedex from './components/Pokedex';
 import Habitat from './components/Habitat';
 
@@ -31,14 +30,7 @@ function Adventure() {
     case 'Habitat':
       return (
         <div>
-          <Habitat setPage = {setPage} />
-        </div>
-      );
-    // Battle is where you find a random Pokemon in the Habitat and either Battle or Run Away
-    case 'Battle':
-      return (
-        <div>
-          <Battle setPage = {setPage} habitat = { habitat } />
+          <Habitat setPage = {setPage} habitat = { habitat } />
         </div>
       );
     // Starter is where you choose your starter Pokemon when a user first enters
