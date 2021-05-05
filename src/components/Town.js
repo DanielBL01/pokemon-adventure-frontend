@@ -13,8 +13,8 @@ function Town(props) {
     <div>
       <h1 className={styles.header}>Pokémon live in all sorts of habitats. Travel to different locations and catch them all!</h1>
       <h3 className={styles.header}>
-        <button className={styles.pokedex} onClick={props.handleModalOpen}><IoMdPhoneLandscape size={35}/></button>
-        <button className={styles.pokemon}><CgPokemon size={35}/></button>
+        <button className={styles.pokedex} onClick={props.handlePokedexModalOpen}><IoMdPhoneLandscape size={35}/></button>
+        <button className={styles.pokemon} onClick={props.handlePokemonModalOpen}><CgPokemon size={35}/></button>
       </h3>
       <div className={styles.options}>
         <button className={`${styles.button} ${styles.cave}`} onClick = {() => handleClick(1)}>Cave</button>

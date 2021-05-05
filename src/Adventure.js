@@ -3,47 +3,53 @@ import Starter from './components/Starter';
 import Town from './components/Town';
 import Habitat from './components/Habitat';
 import Pokedex from './components/Pokedex';
+import Pokemon from './components/Pokemon';
 
 function Adventure() {
   const [page, setPage] = useState('Starter');
-  const [starter, setStarter] = useState('');
   const [habitat, setHabitat] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pokedexModalIsOpen, setPokedexModalIsOpen] = useState(false);
+  const [pokemonModalIsOpen, setPokemonModalIsOpen] = useState(false);
 
-  function handleModalOpen(e) {
+  function handlePokedexModalOpen(e) {
     e.preventDefault();
-    setModalIsOpen(true);
+    setPokedexModalIsOpen(true);
   }
 
-  function handleModalClose(e) {
+  function handlePokedexModalClose(e) {
     e.preventDefault();
-    setModalIsOpen(false);
+    setPokedexModalIsOpen(false);
+  }
+
+  function handlePokemonModalOpen(e) {
+    e.preventDefault();
+    setPokemonModalIsOpen(true);
+  }
+
+  function handlePokemonModalClose(e) {
+    e.preventDefault();
+    setPokemonModalIsOpen(false);
   }
 
   let display;
-  switch (page) {
-    case 'Town':
-      display = 
-        <div>
-          <Town setPage = {setPage} setHabitat = { setHabitat } handleModalOpen = {handleModalOpen} />
-          <Pokedex modalIsOpen = {modalIsOpen} handleModalClose = {handleModalClose} />
-        </div>
-      break;
-
-    case 'Habitat':
-      display = 
-        <div>
-          <Habitat setPage = {setPage} habitat = { habitat } />
-        </div>
-      break;
-
-    default:
-      display = 
-        <div>
-          <Starter setPage = {setPage} starter = {starter} setStarter = {setStarter} />
-        </div>
-      break;
-  };
+  if (page === 'Starter') {
+    display = 
+      <div>
+        <Starter setPage = {setPage} />
+      </div>
+  } else if (page === 'Town') {
+    display = 
+      <div>
+        <Town setPage = {setPage} setHabitat = { setHabitat } handlePokedexModalOpen = {handlePokedexModalOpen} handlePokemonModalOpen = {handlePokemonModalOpen}/>
+        <Pokedex pokedexModalIsOpen = {pokedexModalIsOpen} handlePokedexModalClose = {handlePokedexModalClose} />
+        <Pokemon pokemonModalIsOpen = {pokemonModalIsOpen} handlePokemonModalClose = {handlePokemonModalClose} />
+      </div>
+  } else if (page === 'Habitat') {
+    display = 
+      <div>
+        <Habitat setPage = {setPage} habitat = { habitat } />
+      </div>
+  } 
 
   return (
     <div className='container'>
