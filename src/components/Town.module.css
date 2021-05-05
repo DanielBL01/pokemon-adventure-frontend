@@ -1,0 +1,73 @@
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 130px 130px 130px;
+    grid-gap: 45px;
+}
+
+.pokedex {
+    margin-right: 10px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pokemon {
+    margin-left: 10px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.button {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 45px;
+    box-shadow: 5px 5px 5px #aaaaaa;
+}
+
+.cave {
+    background-color: #404040;
+}
+
+.forest {
+    background-color: #00802b;
+}
+
+.grassland {
+    background-color: #00e600;
+}
+
+.mountain {
+    background-color: #996633;
+}
+
+.rare {
+    background-color: pink;
+    background-image: linear-gradient(#66ccff, #cc66ff);
+}
+
+.rough_terrain {
+    background-color: #4d0000;
+}
+
+.sea {
+    background-color: #3366ff;
+}
+
+.urban {
+    background-color: #ac3973;
+}
+
+.water_edge {
+    background-color: #66ccff;
+}

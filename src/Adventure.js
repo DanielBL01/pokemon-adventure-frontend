@@ -1,46 +1,55 @@
 import React, { useState } from 'react';
 import Starter from './components/Starter';
 import Town from './components/Town';
-import Pokedex from './components/Pokedex';
 import Habitat from './components/Habitat';
+import Pokedex from './components/Pokedex';
 
 function Adventure() {
-
   const [page, setPage] = useState('Starter');
-  const [seen, setSeen] = useState(false);
   const [starter, setStarter] = useState('');
   const [habitat, setHabitat] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  function handleClick() {
-    setSeen(!seen);
+  function handleModalOpen(e) {
+    e.preventDefault();
+    setModalIsOpen(true);
   }
 
+  function handleModalClose(e) {
+    e.preventDefault();
+    setModalIsOpen(false);
+  }
+
+  let display;
   switch (page) {
-    // Town is where you choose to view your Pokedex or go to a Habitat to find Pokemon
     case 'Town':
-      return (
+      display = 
         <div>
-          <Town setPage = {setPage} setHabitat = { setHabitat } handleClick = {handleClick} />
-          <div>
-            {seen ? <Pokedex handleClick = {handleClick} /> : null}
-          </div>
+          <Town setPage = {setPage} setHabitat = { setHabitat } handleModalOpen = {handleModalOpen} />
+          <Pokedex modalIsOpen = {modalIsOpen} handleModalClose = {handleModalClose} />
         </div>
-      );
-    // Habitat is a waiting screen to simulate waiting for a wild Pokemon to appear. There should also be an option to go back to Town
+      break;
+
     case 'Habitat':
-      return (
+      display = 
         <div>
           <Habitat setPage = {setPage} habitat = { habitat } />
         </div>
-      );
-    // Starter is where you choose your starter Pokemon when a user first enters
+      break;
+
     default:
-      return (
+      display = 
         <div>
           <Starter setPage = {setPage} starter = {starter} setStarter = {setStarter} />
         </div>
-      );
+      break;
   };
+
+  return (
+    <div className='container'>
+      {display}
+    </div>
+  )
 }
 
 export default Adventure;

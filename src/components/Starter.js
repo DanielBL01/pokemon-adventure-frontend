@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Starter.module.css';
 
 function Starter(props) {
   function handleClick(e) {
@@ -8,7 +9,7 @@ function Starter(props) {
 
   return (
     <div>
-      <div>Choose a Starter Pokemon...</div>
+      <h1 className={styles.header}>Choose a Starter Pokemon</h1>
       <button onClick = {() => handleClick('bulbasaur')}>
         bulbasaur
       </button>

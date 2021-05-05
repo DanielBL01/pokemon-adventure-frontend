@@ -1,0 +1,12 @@
+.header {
+    text-align: center;
+}
+
+.name {
+    display: inline;
+    text-transform: uppercase;
+}
+
+.type {
+    text-transform: uppercase;
+}
