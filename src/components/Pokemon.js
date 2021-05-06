@@ -33,7 +33,7 @@ function Pokemon(props) {
               {team.map(pokemon => {
                 return (
                   <ul className={`${styles.list_display} ${styles.pokemon_entry}`}>
-                    <button value={pokemon.name} className={styles.release} onClick={handleClick}>Release</button>
+                    {team.length > 1 && <button value={pokemon.name} className={styles.release} onClick={handleClick}>Release</button>}
                     <li>NAME: <span className={styles.cap}>{pokemon.name}</span></li>
                     <li>TYPES:</li>
                     <ul className={styles.list_display}>

@@ -11,7 +11,7 @@ function Town(props) {
 
   return (
     <div>
-      <h1 className={styles.header}>Pokémon live in all sorts of habitats. Travel to different locations and catch them all!</h1>
+      <h1 className={styles.header}>Pokémon live in all sorts of environments. Explore different habitats and have fun!</h1>
       <h3 className={styles.header}>
         <button className={styles.pokedex} onClick={props.handlePokedexModalOpen}><IoMdPhoneLandscape size={35}/></button>
         <button className={styles.pokemon} onClick={props.handlePokemonModalOpen}><CgPokemon size={35}/></button>
