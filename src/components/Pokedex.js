@@ -33,12 +33,12 @@ function Pokedex(props) {
                     <li>HEIGHT: {pokemon.height}</li>
                     <li>WEIGHT: {pokemon.weight}</li>
                     <li>STATS:</li>
-                    <ul className={styles.list_display}>
-                      <li>HP: {pokemon.hp}</li>
-                      <li>ATTACK: {pokemon.attack}</li>
-                      <li>DEFENSE: {pokemon.defense}</li>
-                      <li>SPEED: {pokemon.speed}</li>
-                    </ul>
+                      <ul className={styles.list_display}>
+                        <li>HP: {pokemon.stats.hp}</li>
+                        <li>ATTACK: {pokemon.stats.attack}</li>
+                        <li>DEFENSE: {pokemon.stats.defense}</li>
+                        <li>SPEED: {pokemon.stats.speed}</li>
+                      </ul>
                   </ul>
                 )
               })}
