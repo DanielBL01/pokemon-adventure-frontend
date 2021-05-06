@@ -8,11 +8,15 @@ function Habitat(props) {
   const [types, setTypes] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`/habitat?index=${props.habitat}`);
-      const data = result.data[0];
-      setAbout({name: data.name, weight: data.weight, height: data.height});
-      setStats({hp: data.stats.hp, attack: data.stats.attack, defense: data.stats.defense, speed: data.stats.speed});
-      setTypes(data.types);
+      try {
+        const result = await axios.get(`/habitat?index=${props.habitat}`);
+        const data = result.data[0];
+        setAbout({name: data.name, weight: data.weight, height: data.height});
+        setStats({hp: data.stats.hp, attack: data.stats.attack, defense: data.stats.defense, speed: data.stats.speed});
+        setTypes(data.types);
+      } catch {
+        props.setPage('Town');
+      }
     }
     fetchData();
   }, [props]);

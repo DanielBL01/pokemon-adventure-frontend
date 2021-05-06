@@ -6,7 +6,7 @@ import { CgPokemon } from 'react-icons/cg';
 function Starter(props) {  
   async function handleClick(e) {
     e.preventDefault();
-    await axios.post('/catch', {'pokemon': e.currentTarget.value});
+    await axios.post('/partner', {'starter': e.currentTarget.value});
     props.setPage('Town');
   }
 
