@@ -15,13 +15,13 @@ function Starter(props) {
       <h1 className={styles.header}>Choose a Starter Pokemon</h1>
       <h3 className={styles.header}>
         <button className={styles.bulbasaur} value='bulbasaur' data-tooltip='Bulbasaur' onClick = {handleClick}>
-          <CgPokemon size={100}/>
+          <CgPokemon size={125}/>
         </button>
         <button className={styles.charmander} value='charmander' data-tooltip='Charmander' onClick = {handleClick}>
-          <CgPokemon size={100}/>
+          <CgPokemon size={125}/>
         </button>
         <button className={styles.squirtle} value='squirtle' data-tooltip='Squirtle' onClick = {handleClick}>
-          <CgPokemon size={100}/>
+          <CgPokemon size={125}/>
         </button>
       </h3>
     </div>
