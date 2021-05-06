@@ -22,6 +22,12 @@ function Habitat(props) {
     props.setPage('Town');
   }
 
+  async function catchPokemon(e) {
+    e.preventDefault();
+    await axios.post('/catch', {'pokemon': about.name});
+    props.setPage('Town');
+  }
+
   let display;
   if (about.name !== '') {
     display = 
@@ -34,13 +40,14 @@ function Habitat(props) {
           <li>SPEED: {stats.speed}</li>
         </ul>
         <ul>{types.map(type => <li className={styles.type}>{type}</li>)}</ul>
-        <button onClick = {handleClick}>Run</button>
+        <button className={`${styles.encounter_options} ${styles.run}`} onClick = {handleClick}>Run</button>
+        <button className={`${styles.encounter_options} ${styles.pokeball}`} onClick = {catchPokemon}>Poké Ball</button>
       </div>
   } else {
     display = 
       <div>
         <h1 className={styles.header}>Looking for Wild Pokemon...</h1>
-        <button onClick = {handleClick}>Go back to Town</button>
+        <button className={styles.back_to_town} onClick = {handleClick}>Go back to Town</button>
       </div>
   }
 

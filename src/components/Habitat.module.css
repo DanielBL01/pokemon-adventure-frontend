@@ -10,3 +10,42 @@
 .type {
     text-transform: uppercase;
 }
+
+.back_to_town {
+    border: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Oswald', sans-serif;
+    font-size: 25px;
+    width: 200px;
+    height: 100px;
+    background-color: #45a3f5;
+    box-shadow: 5px 5px 5px #aaaaaa;
+    cursor: pointer;
+}
+
+.encounter_options {
+    border: none;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Oswald', sans-serif;
+    font-size: 25px;
+    width: 200px;
+    height: 100px;
+    box-shadow: 5px 5px 5px #aaaaaa;
+    cursor: pointer;
+}
+
+.run {
+    position: absolute;
+    left: 0;
+    background-color: #45a3f5;
+}
+
+.pokeball {
+    position: absolute;
+    right: 0;
+    background-color: #fab834
+}
