@@ -3,17 +3,24 @@ import axios from 'axios';
 import styles from './Habitat.module.css';
 
 function Habitat(props) {
-  const [about, setAbout] = useState({name: '', weight: 0, height: 0});
-  const [stats, setStats] = useState({hp: 0, attack: 0, defense: 0, speed: 0});
-  const [types, setTypes] = useState([]);
+  const [wildAbout, setWildAbout] = useState({name: '', weight: 0, height: 0});
+  const [wildStats, setWildStats] = useState({hp: 0, current_hp: 0, attack: 0, defense: 0, speed: 0});
+  const [fighterAbout, setFighterAbout] = useState({name: '', weight: 0, height: 0});
+  const [fighterStats, setFighterStats] = useState({hp: 0, current_hp: 0, attack: 0, defense: 0, speed: 0});
+  const [messages, setMessages] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(`/habitat?index=${props.habitat}`);
-        const data = result.data[0];
-        setAbout({name: data.name, weight: data.weight, height: data.height});
-        setStats({hp: data.stats.hp, attack: data.stats.attack, defense: data.stats.defense, speed: data.stats.speed});
-        setTypes(data.types);
+        const wildResult = await axios.get(`/habitat?index=${props.habitat}`);
+        const wildData = wildResult.data[0];
+        setWildAbout({name: wildData.name, weight: wildData.weight, height: wildData.height});
+        setWildStats({hp: wildData.stats.hp, current_hp: wildData.stats.hp, attack: wildData.stats.attack, defense: wildData.stats.defense, speed: wildData.stats.speed});
+        const fighterResult = await axios.post('/fighter', {'fighter': props.fighter});
+        const fighterData = fighterResult.data[0];
+        setFighterAbout({name: fighterData.name, weight: fighterData.weight, height: fighterData.height});
+        setFighterStats({hp: fighterData.stats.hp, current_hp: fighterData.stats.hp, attack: fighterData.stats.attack, defense: fighterData.stats.defense, speed: fighterData.stats.speed});
+        setMessages(msgs => [...msgs, `A wild ${wildData.name} appeared!`]);
+        setMessages(msgs => [...msgs, `I choose you ${fighterData.name}!`]);
       } catch {
         props.setPage('Town');
       }
@@ -21,37 +28,61 @@ function Habitat(props) {
     fetchData();
   }, [props]);
 
-  function handleClick(e) {
+  function returnToTown(e) {
     e.preventDefault();
     props.setPage('Town');
   }
 
-  async function catchPokemon(e) {
+  function handleRunClick(e) {
     e.preventDefault();
-    await axios.post('/catch', {'pokemon': about.name});
     props.setPage('Town');
+    setMessages([]);
+  }
+
+  function handleBattleClick(e) {
+    e.preventDefault();
+    props.setPage('Town');
+  }
+
+  async function handleCatchClick(e) {
+    e.preventDefault();
+    await axios.post('/catch', {'pokemon': wildAbout.name});
+    props.setPage('Town');
+    setMessages([]);
   }
 
   let display;
-  if (about.name !== '') {
+  if (wildAbout.name !== '' && fighterAbout.name !== '') {
     display = 
-      <div>
-        <h1>A wild <div className={styles.name}>{about.name}</div> appeared!</h1>
-        <ul>
-          <li>HP: {stats.hp}</li>
-          <li>ATTACK: {stats.attack}</li>
-          <li>DEFENSE: {stats.defense}</li>
-          <li>SPEED: {stats.speed}</li>
-        </ul>
-        <ul>{types.map(type => <li className={styles.type}>{type}</li>)}</ul>
-        <button className={`${styles.encounter_options} ${styles.run}`} onClick = {handleClick}>Run</button>
-        <button className={`${styles.encounter_options} ${styles.pokeball}`} onClick = {catchPokemon}>Poké Ball</button>
+    <div>
+      <div className={styles.battle}>
+        <div>
+          <h1><div className={styles.name}>{fighterAbout.name}</div></h1>
+          <h3>HP: {fighterStats.current_hp}/{fighterStats.hp}</h3>
+        </div>
+        <div>
+          <h1><div className={styles.name}>{wildAbout.name}</div></h1>
+          <h3>HP: {wildStats.current_hp}/{wildStats.hp}</h3>
+        </div>
       </div>
+      <div className={styles.text_box}>
+        <ul className={styles.messages}>
+          {messages.map(message => {
+            return <li>{message}</li>
+          })}
+        </ul>
+      </div>
+      <div className={styles.button_options}>
+        <button className={`${styles.encounter_options} ${styles.run}`} onClick = {handleRunClick}>Run</button>
+        <button className={`${styles.encounter_options} ${styles.fight}`} onClick = {handleBattleClick}>Battle</button>
+        <button className={`${styles.encounter_options} ${styles.pokeball}`} onClick = {handleCatchClick}>Poké Ball</button>
+      </div>
+    </div>
   } else {
     display = 
       <div>
         <h1 className={styles.header}>Looking for Wild Pokemon...</h1>
-        <button className={styles.back_to_town} onClick = {handleClick}>Go back to Town</button>
+        <button className={`${styles.encounter_options} ${styles.back_to_town}`} onClick = {returnToTown}>Go back to Town</button>
       </div>
   }
 

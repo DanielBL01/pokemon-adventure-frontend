@@ -11,18 +11,30 @@
     text-transform: uppercase;
 }
 
-.back_to_town {
-    border: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Oswald', sans-serif;
-    font-size: 25px;
-    width: 200px;
-    height: 100px;
-    background-color: #45a3f5;
-    box-shadow: 5px 5px 5px #aaaaaa;
-    cursor: pointer;
+.battle {
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+}
+
+.text_box {
+    border: solid;
+    border-color: black;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    height: 250px;
+    max-height: 250px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.messages {
+    list-style-type: none;
+}
+
+.button_options {
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 
 .encounter_options {
@@ -38,14 +50,21 @@
     cursor: pointer;
 }
 
-.run {
-    position: absolute;
-    left: 0;
+.back_to_town {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #45a3f5;
 }
 
+.run {
+    background-color: #45a3f5;
+}
+
+.fight {
+    background-color: #f54b42;
+}
+
 .pokeball {
-    position: absolute;
-    right: 0;
     background-color: #fab834
 }
