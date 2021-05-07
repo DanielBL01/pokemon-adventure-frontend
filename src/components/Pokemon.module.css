@@ -44,3 +44,28 @@
     color: white;
     cursor: pointer;
 }
+
+.fighter {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    float: right;
+    border-radius: 10px;
+    border: none;
+    padding: 8px;
+    background-color: #76d959;
+    color: white;
+    margin-right: 10px;
+}
+
+.set_fighter {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    float: right;
+    border-radius: 10px;
+    border: none;
+    padding: 8px 15px 8px 15px;
+    background-color: #24b2ff;
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}

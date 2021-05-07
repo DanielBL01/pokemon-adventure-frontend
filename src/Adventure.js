@@ -10,6 +10,7 @@ function Adventure() {
   const [habitat, setHabitat] = useState(0);
   const [pokedexModalIsOpen, setPokedexModalIsOpen] = useState(false);
   const [pokemonModalIsOpen, setPokemonModalIsOpen] = useState(false);
+  const [fighter, setFighter] = useState('');
 
   function handlePokedexModalOpen(e) {
     e.preventDefault();
@@ -35,19 +36,19 @@ function Adventure() {
   if (page === 'Starter') {
     display = 
       <div>
-        <Starter setPage = {setPage} />
+        <Starter setPage = {setPage} setFighter = {setFighter} />
       </div>
   } else if (page === 'Town') {
     display = 
       <div>
-        <Town setPage = {setPage} setHabitat = { setHabitat } handlePokedexModalOpen = {handlePokedexModalOpen} handlePokemonModalOpen = {handlePokemonModalOpen}/>
+        <Town setPage = {setPage} setHabitat = { setHabitat } handlePokedexModalOpen = {handlePokedexModalOpen} handlePokemonModalOpen = {handlePokemonModalOpen} setFighter = {setFighter} />
         <Pokedex pokedexModalIsOpen = {pokedexModalIsOpen} handlePokedexModalClose = {handlePokedexModalClose} />
-        <Pokemon pokemonModalIsOpen = {pokemonModalIsOpen} handlePokemonModalClose = {handlePokemonModalClose} />
+        <Pokemon pokemonModalIsOpen = {pokemonModalIsOpen} handlePokemonModalClose = {handlePokemonModalClose} fighter = {fighter} setFighter = {setFighter} />
       </div>
   } else if (page === 'Habitat') {
     display = 
       <div>
-        <Habitat setPage = {setPage} habitat = { habitat } />
+        <Habitat setPage = {setPage} habitat = { habitat } fighter = {fighter} />
       </div>
   } 
 

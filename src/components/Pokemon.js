@@ -11,7 +11,7 @@ function Pokemon(props) {
       setTeam(result.data);
     }
     fetchData();
-  }, [team]); // re-render if team changes
+  }, [team]); // since we get the team from the backend, we need to re-render through the useEffect
 
   async function handleClick(e) {
     e.preventDefault();
@@ -21,6 +21,12 @@ function Pokemon(props) {
     });
     setTeam(temp);
     await axios.post('/release', {'pokemon': e.target.value});
+  }
+
+  function changeFighter(e) {
+    e.preventDefault();
+    const newFighter = e.target.value;
+    props.setFighter(newFighter); // Since fighter setFighter is just a React state, React will re-render upon change
   }
 
   return (
@@ -33,7 +39,9 @@ function Pokemon(props) {
               {team.map(pokemon => {
                 return (
                   <ul className={`${styles.list_display} ${styles.pokemon_entry}`}>
-                    {team.length > 1 && <button value={pokemon.name} className={styles.release} onClick={handleClick}>Release</button>}
+                    {team.length > 1 && props.fighter !== pokemon.name && <button value={pokemon.name} className={styles.release} onClick={handleClick}>Release</button>}
+                    {props.fighter !== pokemon.name && <button value={pokemon.name} className={styles.set_fighter} onClick={changeFighter}>Set</button>}
+                    {props.fighter === pokemon.name && <span className={styles.fighter}>Fighter</span>}
                     <li>NAME: <span className={styles.cap}>{pokemon.name}</span></li>
                     <li>TYPES:</li>
                     <ul className={styles.list_display}>
