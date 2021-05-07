@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.bulbasaur {
+.starter {
     font-family: 'Oswald', sans-serif;
     position: relative;
     background-color: white;
@@ -12,115 +12,56 @@
     margin-right: 25px;
     margin-left: 25px;
 }
-.bulbasaur:hover{
+
+.starter:hover{
     text-decoration: none;
 }
-.bulbasaur::before {
-    border-left: 5px solid transparent;
-    border-top: 5px solid #33cc33;
-    border-right: 5px solid transparent;
-    height: 0px;
-    width: 0px;
-    content:'';
-    top: -2px;
-    left: 6px;
-}
-.bulbasaur::after {
+
+.starter.yellow::after {
     content: attr(data-tooltip);
     top: -25px; left: -5px;
-    background: #33cc33;
+    background: #f8ff17;
     border-radius: 4px;
     padding: 2px 6px;
     white-space: nowrap;
     color: black;
 }
 
-.bulbasaur::after, .bulbasaur::before {
-    position: absolute;
-    display: none;
-}
-.bulbasaur:hover::after, .bulbasaur:hover::before {
-    display: block;
-}
-
-.charmander {
-    font-family: 'Oswald', sans-serif;
-    position: relative;
-    background-color: white;
-    border: 0;
-    cursor: pointer;
-    margin-top: 80px;
-    margin-right: 25px;
-    margin-left: 25px;
-}
-.charmander:hover{
-    text-decoration: none;
-}
-.charmander::before {
-    border-left: 5px solid transparent;
-    border-top: 5px solid #ff3333;
-    border-right: 5px solid transparent;
-    height: 0px;
-    width: 0px;
-    content:'';
-    top: -2px;
-    left: 6px;
-}
-.charmander::after {
+.starter.green::after {
     content: attr(data-tooltip);
     top: -25px; left: -5px;
-    background: #ff3333;
+    background: #17e610;
     border-radius: 4px;
     padding: 2px 6px;
     white-space: nowrap;
     color: black;
 }
 
-.charmander::after, .charmander::before {
-    position: absolute;
-    display: none;
-}
-.charmander:hover::after, .charmander:hover::before {
-    display: block;
-}
-
-.squirtle {
-    font-family: 'Oswald', sans-serif;
-    position: relative;
-    background-color: white;
-    border: 0;
-    cursor: pointer;
-    margin-top: 80px;
-    margin-right: 25px;
-    margin-left: 25px;
-}
-.squirtle:hover{
-    text-decoration: none;
-}
-.squirtle::before {
-    border-left: 5px solid transparent;
-    border-top: 5px solid #3399ff;
-    border-right: 5px solid transparent;
-    height: 0px;
-    width: 0px;
-    content:'';
-    top: -2px;
-    left: 6px;
-}
-.squirtle::after {
+.starter.red::after {
     content: attr(data-tooltip);
     top: -25px; left: -5px;
-    background: #3399ff;
+    background: #fc4a03;
     border-radius: 4px;
     padding: 2px 6px;
     white-space: nowrap;
     color: black;
 }
 
-.squirtle::after, .squirtle::before {
+.starter.blue::after {
+    content: attr(data-tooltip);
+    top: -25px; left: -5px;
+    background: #03cefc;
+    border-radius: 4px;
+    padding: 2px 6px;
+    white-space: nowrap;
+    color: black;
+}
+
+.starter::after, .starter::before {
     position: absolute;
     display: none;
 }
-.squirtle:hover::after, .squirtle:hover::before {
+
+.starter:hover::after, .bulbasaur:hover::before {
     display: block;
 }

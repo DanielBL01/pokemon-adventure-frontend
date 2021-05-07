@@ -28,27 +28,63 @@ function Habitat(props) {
     fetchData();
   }, [props]);
 
-  function returnToTown(e) {
-    e.preventDefault();
+  function returnToTown() {
     props.setPage('Town');
   }
 
-  function handleRunClick(e) {
-    e.preventDefault();
-    props.setPage('Town');
+  function handleRunClick() {
     setMessages([]);
-  }
-
-  function handleBattleClick(e) {
-    e.preventDefault();
     props.setPage('Town');
   }
 
-  async function handleCatchClick(e) {
-    e.preventDefault();
+  function handleBattleClick() {
+    var trackFighterHP = fighterStats.hp;
+    var trackWildHP = wildStats.hp;
+    if (fighterStats.speed >= wildStats.speed) {
+      while (trackFighterHP !== 0 || trackWildHP !== 0) {
+        setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
+        trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
+        if (trackWildHP <= 0) {
+          setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
+          setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
+          setWildStats({hp: wildStats.hp, current_hp: 0});
+          break;
+        }
+        setMessages(msgs => [...msgs, `The wild ${wildAbout.name} attacked!`]);
+        trackFighterHP = Math.round(trackFighterHP - (wildStats.attack / fighterStats.defense) * 10);
+        if (trackFighterHP <= 0) {
+          setMessages(msgs => [...msgs, `${fighterAbout.name} fainted!`]);
+          setFighterStats({hp: fighterStats.hp, current_hp: 0});
+          setWildStats({hp: wildStats.hp, current_hp: trackWildHP});
+          break;
+        }
+      }
+    } else {
+      while (trackFighterHP !== 0 || trackWildHP !== 0) {
+        setMessages(msgs => [...msgs, `The wild ${wildAbout.name} attacked!`]);
+        trackFighterHP = Math.round(trackFighterHP - (wildStats.attack / fighterStats.defense) * 10);
+        if (trackFighterHP <= 0) {
+          setMessages(msgs => [...msgs, `${fighterAbout.name} fainted!`]);
+          setFighterStats({hp: fighterStats.hp, current_hp: 0});
+          setWildStats({hp: wildStats.hp, current_hp: trackWildHP});          
+          break;
+        }
+        setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
+        trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
+        if (trackWildHP <= 0) {
+          setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
+          setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
+          setWildStats({hp: wildStats.hp, current_hp: 0});          
+          break;
+        }
+      }
+    }
+  }
+
+  async function handleCatchClick() {
     await axios.post('/catch', {'pokemon': wildAbout.name});
-    props.setPage('Town');
     setMessages([]);
+    props.setPage('Town');
   }
 
   let display;

@@ -6,6 +6,7 @@ import styles from './Pokemon.module.css';
 function Pokemon(props) {
   const [team, setTeam] = useState([]);
   useEffect(() => {
+    Modal.setAppElement('body');
     const fetchData = async () => {
       const result = await axios.get('/team');
       setTeam(result.data);

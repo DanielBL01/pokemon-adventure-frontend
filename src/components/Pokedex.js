@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import styles from './Pokedex.module.css';
 
 function Pokedex(props) {
+  Modal.setAppElement('body');
   const [pokedex, setPokedex] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
