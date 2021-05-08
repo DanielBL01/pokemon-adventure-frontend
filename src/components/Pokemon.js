@@ -5,9 +5,12 @@ import styles from './Pokemon.module.css';
 
 function Pokemon(props) {
   const [team, setTeam] = useState([]);
+  const [experience, setExperience] = useState({});
   useEffect(() => {
     Modal.setAppElement('body');
     const fetchData = async () => {
+      const experienceResult = await axios.get('/experience');
+      setExperience(experienceResult.data);
       const result = await axios.get('/team');
       setTeam(result.data);
     }
@@ -54,10 +57,10 @@ function Pokemon(props) {
                     <li>WEIGHT: {pokemon.weight}</li>
                     <li>STATS:</li>
                     <ul className={styles.list_display}>
-                      <li>HP: {pokemon.stats.hp}</li>
-                      <li>ATTACK: {pokemon.stats.attack}</li>
-                      <li>DEFENSE: {pokemon.stats.defense}</li>
-                      <li>SPEED: {pokemon.stats.speed}</li>
+                      <li>HP: {pokemon.stats.hp + experience[pokemon.name]}</li>
+                      <li>ATTACK: {pokemon.stats.attack + experience[pokemon.name]}</li>
+                      <li>DEFENSE: {pokemon.stats.defense + experience[pokemon.name]}</li>
+                      <li>SPEED: {pokemon.stats.speed + experience[pokemon.name]}</li>
                     </ul>
                   </ul>
                 )

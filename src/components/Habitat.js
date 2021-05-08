@@ -18,8 +18,10 @@ function Habitat(props) {
         setWildStats({hp: wildData.stats.hp, current_hp: wildData.stats.hp, attack: wildData.stats.attack, defense: wildData.stats.defense, speed: wildData.stats.speed});
         const fighterResult = await axios.post('/fighter', {'fighter': props.fighter});
         const fighterData = fighterResult.data[0];
+        const expResult = await axios.get('/experience');
+        const exp = expResult.data[fighterData.name];
         setFighterAbout({name: fighterData.name, weight: fighterData.weight, height: fighterData.height});
-        setFighterStats({hp: fighterData.stats.hp, current_hp: fighterData.stats.hp, attack: fighterData.stats.attack, defense: fighterData.stats.defense, speed: fighterData.stats.speed});
+        setFighterStats({hp: fighterData.stats.hp + exp, current_hp: fighterData.stats.hp + exp, attack: fighterData.stats.attack + exp, defense: fighterData.stats.defense + exp, speed: fighterData.stats.speed + exp});
         setMessages(msgs => [...msgs, `A wild ${wildData.name} appeared!`]);
         setMessages(msgs => [...msgs, `I choose you ${fighterData.name}!`]);
       } catch {
@@ -38,7 +40,7 @@ function Habitat(props) {
     props.setPage('Town');
   }
 
-  function handleBattleClick() {
+  async function handleBattleClick() {
     setDisable({run: '', battle: '', pokeball: ''});
     var trackFighterHP = fighterStats.hp;
     var trackWildHP = wildStats.hp;
@@ -47,6 +49,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
         trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
         if (trackWildHP <= 0) {
+          await axios.post('/updateExperience', {pokemon: fighterAbout.name});
           setDisable({run: 'run', battle: '', pokeball: 'pokeball'});
           setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
@@ -77,6 +80,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
         trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
         if (trackWildHP <= 0) {
+          await axios.post('/updateExperience', {pokemon: fighterAbout.name});
           setDisable({run: 'run', battle: '', pokeball: 'pokeball'});
           setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
