@@ -8,6 +8,7 @@ function Habitat(props) {
   const [fighterAbout, setFighterAbout] = useState({name: '', weight: 0, height: 0});
   const [fighterStats, setFighterStats] = useState({hp: 0, current_hp: 0, attack: 0, defense: 0, speed: 0});
   const [messages, setMessages] = useState([]);
+  const [disable, setDisable] = useState({run: 'run', battle: 'battle', pokeball: ''});
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,6 +39,7 @@ function Habitat(props) {
   }
 
   function handleBattleClick() {
+    setDisable({run: '', battle: '', pokeball: ''});
     var trackFighterHP = fighterStats.hp;
     var trackWildHP = wildStats.hp;
     if (fighterStats.speed >= wildStats.speed) {
@@ -45,6 +47,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
         trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
         if (trackWildHP <= 0) {
+          setDisable({run: 'run', battle: '', pokeball: 'pokeball'});
           setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
           setWildStats({hp: wildStats.hp, current_hp: 0});
@@ -53,6 +56,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `The wild ${wildAbout.name} attacked!`]);
         trackFighterHP = Math.round(trackFighterHP - (wildStats.attack / fighterStats.defense) * 10);
         if (trackFighterHP <= 0) {
+          setDisable({run: 'run', battle: '', pokeball: ''});
           setMessages(msgs => [...msgs, `${fighterAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: 0});
           setWildStats({hp: wildStats.hp, current_hp: trackWildHP});
@@ -64,6 +68,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `The wild ${wildAbout.name} attacked!`]);
         trackFighterHP = Math.round(trackFighterHP - (wildStats.attack / fighterStats.defense) * 10);
         if (trackFighterHP <= 0) {
+          setDisable({run: 'run', battle: '', pokeball: ''});
           setMessages(msgs => [...msgs, `${fighterAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: 0});
           setWildStats({hp: wildStats.hp, current_hp: trackWildHP});          
@@ -72,6 +77,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
         trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
         if (trackWildHP <= 0) {
+          setDisable({run: 'run', battle: '', pokeball: 'pokeball'});
           setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
           setWildStats({hp: wildStats.hp, current_hp: 0});          
@@ -109,9 +115,9 @@ function Habitat(props) {
         </ul>
       </div>
       <div className={styles.button_options}>
-        <button className={`${styles.encounter_options} ${styles.run}`} onClick = {handleRunClick}>Run</button>
-        <button className={`${styles.encounter_options} ${styles.fight}`} onClick = {handleBattleClick}>Battle</button>
-        <button className={`${styles.encounter_options} ${styles.pokeball}`} onClick = {handleCatchClick}>Poké Ball</button>
+        <button value='run' className={`${styles.encounter_options} ${styles.run}`} onClick = {handleRunClick} disabled={!disable.run}>Run</button>
+        <button value='battle' className={`${styles.encounter_options} ${styles.fight}`} onClick = {handleBattleClick} disabled={!disable.battle}>Battle</button>
+        <button value='pokeball' className={`${styles.encounter_options} ${styles.pokeball}`} onClick = {handleCatchClick} disabled={!disable.pokeball}>Poké Ball</button>
       </div>
     </div>
   } else {
