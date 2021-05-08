@@ -6,7 +6,7 @@ import { CgPokemon } from 'react-icons/cg';
 function Starter(props) {  
   useEffect(() => {
     async function requestDelete() {
-      await axios.get('/delete');
+      await axios.get('https://pokemon-adventure-server.herokuapp.com/delete');
     }
     requestDelete();
   }, []);
@@ -14,7 +14,7 @@ function Starter(props) {
   async function handleClick(e) {
     e.preventDefault();
     const starter = e.currentTarget.value;
-    await axios.post('/partner', {'starter': starter});
+    await axios.post('https://pokemon-adventure-server.herokuapp.com/partner', {'starter': starter});
     props.setFighter(starter);
     props.setPage('Town');
   }

@@ -12,13 +12,13 @@ function Habitat(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const wildResult = await axios.get(`/habitat?index=${props.habitat}`);
+        const wildResult = await axios.get(`https://pokemon-adventure-server.herokuapp.com/habitat?index=${props.habitat}`);
         const wildData = wildResult.data[0];
         setWildAbout({name: wildData.name, weight: wildData.weight, height: wildData.height});
         setWildStats({hp: wildData.stats.hp, current_hp: wildData.stats.hp, attack: wildData.stats.attack, defense: wildData.stats.defense, speed: wildData.stats.speed});
-        const fighterResult = await axios.post('/fighter', {'fighter': props.fighter});
+        const fighterResult = await axios.post('https://pokemon-adventure-server.herokuapp.com/fighter', {'fighter': props.fighter});
         const fighterData = fighterResult.data[0];
-        const expResult = await axios.get('/experience');
+        const expResult = await axios.get('https://pokemon-adventure-server.herokuapp.com/experience');
         const exp = expResult.data[fighterData.name];
         setFighterAbout({name: fighterData.name, weight: fighterData.weight, height: fighterData.height});
         setFighterStats({hp: fighterData.stats.hp + exp, current_hp: fighterData.stats.hp + exp, attack: fighterData.stats.attack + exp, defense: fighterData.stats.defense + exp, speed: fighterData.stats.speed + exp});
@@ -49,7 +49,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
         trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
         if (trackWildHP <= 0) {
-          await axios.post('/updateExperience', {pokemon: fighterAbout.name});
+          await axios.post('https://pokemon-adventure-server.herokuapp.com/updateExperience', {pokemon: fighterAbout.name});
           setDisable({run: 'run', battle: '', pokeball: 'pokeball'});
           setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
@@ -80,7 +80,7 @@ function Habitat(props) {
         setMessages(msgs => [...msgs, `${fighterAbout.name} attack!`]);
         trackWildHP = Math.round(trackWildHP - (fighterStats.attack / wildStats.defense) * 10);
         if (trackWildHP <= 0) {
-          await axios.post('/updateExperience', {pokemon: fighterAbout.name});
+          await axios.post('https://pokemon-adventure-server.herokuapp.com/updateExperience', {pokemon: fighterAbout.name});
           setDisable({run: 'run', battle: '', pokeball: 'pokeball'});
           setMessages(msgs => [...msgs, `The wild ${wildAbout.name} fainted!`]);
           setFighterStats({hp: fighterStats.hp, current_hp: trackFighterHP});
@@ -92,7 +92,7 @@ function Habitat(props) {
   }
 
   async function handleCatchClick() {
-    await axios.post('/catch', {'pokemon': wildAbout.name});
+    await axios.post('https://pokemon-adventure-server.herokuapp.com/catch', {'pokemon': wildAbout.name});
     setMessages([]);
     props.setPage('Town');
   }

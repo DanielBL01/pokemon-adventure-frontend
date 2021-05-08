@@ -8,7 +8,7 @@ function Pokedex(props) {
   const [pokedex, setPokedex] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('/pokedex');
+      const result = await axios.get('https://pokemon-adventure-server.herokuapp.com/pokedex');
       setPokedex(result.data);
     }
     fetchData();

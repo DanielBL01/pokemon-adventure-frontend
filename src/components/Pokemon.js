@@ -9,9 +9,9 @@ function Pokemon(props) {
   useEffect(() => {
     Modal.setAppElement('body');
     const fetchData = async () => {
-      const experienceResult = await axios.get('/experience');
+      const experienceResult = await axios.get('https://pokemon-adventure-server.herokuapp.com/experience');
       setExperience(experienceResult.data);
-      const result = await axios.get('/team');
+      const result = await axios.get('https://pokemon-adventure-server.herokuapp.com/team');
       setTeam(result.data);
     }
     fetchData();
@@ -24,7 +24,7 @@ function Pokemon(props) {
       return pokemon.name !== e.target.value;
     });
     setTeam(temp);
-    await axios.post('/release', {'pokemon': e.target.value});
+    await axios.post('https://pokemon-adventure-server.herokuapp.com/release', {'pokemon': e.target.value});
   }
 
   function changeFighter(e) {
