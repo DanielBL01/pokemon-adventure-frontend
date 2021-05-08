@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import styles from './Starter.module.css';
 import { CgPokemon } from 'react-icons/cg';
 
 function Starter(props) {  
+  useEffect(() => {
+    async function requestDelete() {
+      await axios.get('/delete');
+    }
+    requestDelete();
+  }, []);
+
   async function handleClick(e) {
     e.preventDefault();
     const starter = e.currentTarget.value;
